@@ -1,12 +1,12 @@
 
 /**
- * Native
+ *
  */
 
 const events = require('events')
 
 /**
- * Constants
+ *
  */
 
 const UTF8 = 'utf8'
@@ -376,6 +376,10 @@ class Xml extends events {
 	}
 
 }
+
+/**
+ *
+ */
 
 module.exports = Xml
 
