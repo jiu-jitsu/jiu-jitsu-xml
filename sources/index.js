@@ -599,10 +599,14 @@ class Xml extends events {
 			 *
 			 */
 
-			const [
-				name,
-				value
-			] = attr.split('=')
+			const i = attr.indexOf('=')
+
+			/**
+			 *
+			 */
+
+			const name = attr.substr(0, i)
+			const value = attr.substr(i + 1)
 
 			/**
 			 *
