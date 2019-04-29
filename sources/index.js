@@ -634,5 +634,3 @@ class Xml extends events {
  */
 
 module.exports = Xml
-
-
