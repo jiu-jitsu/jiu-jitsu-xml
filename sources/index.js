@@ -69,36 +69,20 @@ class Xml extends events {
 		super()
 
 		/**
-		 * Iterator
+		 *
 		 */
 
 		this.___i = 0
-
-		/**
-		 * Stop
-		 */
-
 		this.___stop = 0
-
-		/**
-		 * State
-		 */
-
 		this.___state = 0
-
-		/**
-		 * Closed
-		 */
-
 		this.___closed = null
-
-		/**
-		 * Buffer
-		 */
-
 		this.___buffer = Buffer.alloc(0)
 
 	}
+
+	/**
+	 *
+	 */
 
 	read (chunk) {
 
@@ -117,6 +101,10 @@ class Xml extends events {
 
 	}
 
+	/**
+	 *
+	 */
+
 	end () {
 
 		/**
@@ -134,6 +122,10 @@ class Xml extends events {
 
 	}
 
+	/**
+	 *
+	 */
+
 	___concat (chunk) {
 
 		/**
@@ -143,6 +135,10 @@ class Xml extends events {
 		this.___buffer = Buffer.concat([this.___buffer, chunk])
 
 	}
+
+	/**
+	 *
+	 */
 
 	___read () {
 
@@ -175,13 +171,7 @@ class Xml extends events {
 					 */
 
 					if (this.___buffer[this.___i] === CHAR_ESCAPE_LEFT) {
-
-						/**
-						 *
-						 */
-
 						this.___onTagStart()
-
 					}
 
 					/**
@@ -201,19 +191,8 @@ class Xml extends events {
 					 */
 
 					if (this.___buffer[this.___i] === CHAR_ESCAPE_RIGHT) {
-
-						/**
-						 *
-						 */
-
 						closed = this.___buffer[this.___i - 1] === CHAR_FORWARD_SLASH
-
-						/**
-						 *
-						 */
-
 						this.___onTag(closed)
-
 					}
 
 					/**
@@ -221,13 +200,7 @@ class Xml extends events {
 					 */
 
 					if (this.___buffer[this.___i - 1] === CHAR_ESCAPE_LEFT && this.___buffer[this.___i] === CHAR_FORWARD_SLASH) {
-
-						/**
-						 *
-						 */
-
 						this.___onTagClose()
-
 					}
 
 					/**
@@ -235,13 +208,7 @@ class Xml extends events {
 					 */
 
 					if (this.___buffer[this.___i - 2] === CHAR_ESCAPE_LEFT && this.___buffer[this.___i - 1] === CHAR_EXCLAMATION && this.___buffer[this.___i] === CHAR_DASH) {
-
-						/**
-						 *
-						 */
-
 						this.___onCommentStart()
-
 					}
 
 					/**
@@ -249,13 +216,7 @@ class Xml extends events {
 					 */
 
 					if (this.___buffer[this.___i - 1] === CHAR_ESCAPE_LEFT && this.___buffer[this.___i] === CHAR_QUESTION) {
-
-						/**
-						 *
-						 */
-
 						this.___onInstructionStart()
-
 					}
 
 					/**
@@ -263,13 +224,7 @@ class Xml extends events {
 					 */
 
 					if (this.___buffer[this.___i - 2] === CHAR_ESCAPE_LEFT && this.___buffer[this.___i - 1] === CHAR_EXCLAMATION && this.___buffer[this.___i] === CHAR_SQUARE_BRACKET_LEFT) {
-
-						/**
-						 *
-						 */
-
 						this.___onCDATAStart()
-
 					}
 
 					/**
@@ -289,13 +244,7 @@ class Xml extends events {
 					 */
 
 					if (this.___buffer[this.___i - 2] === CHAR_DASH && this.___buffer[this.___i - 1] === CHAR_DASH && this.___buffer[this.___i] === CHAR_ESCAPE_RIGHT) {
-
-						/**
-						 *
-						 */
-
 						this.___onCommentEnd()
-
 					}
 
 					/**
@@ -315,13 +264,7 @@ class Xml extends events {
 					 */
 
 					if (this.___buffer[this.___i - 1] === CHAR_QUESTION && this.___buffer[this.___i] === CHAR_ESCAPE_RIGHT) {
-
-						/**
-						 *
-						 */
-
 						this.___onInstructionEnd()
-
 					}
 
 					/**
@@ -341,13 +284,7 @@ class Xml extends events {
 					 */
 
 					if (this.___buffer[this.___i - 2] === CHAR_SQUARE_BRACKET_RIGHT && this.___buffer[this.___i - 1] === CHAR_SQUARE_BRACKET_RIGHT && this.___buffer[this.___i] === CHAR_ESCAPE_RIGHT) {
-
-						/**
-						 *
-						 */
-
 						this.___onCDATAEnd()
-
 					}
 
 					/**
@@ -374,6 +311,10 @@ class Xml extends events {
 
 	}
 
+	/**
+	 *
+	 */
+
 	___decoding (s, e) {
 
 		/**
@@ -383,6 +324,10 @@ class Xml extends events {
 		return this.___buffer.slice(s, e).toString()
 
 	}
+
+	/**
+	 *
+	 */
 
 	___onTagStart () {
 
@@ -404,26 +349,14 @@ class Xml extends events {
 		 */
 
 		if (text) {
-
-			/**
-			 *
-			 */
-
 			this.emit(EVENT_TEXT, text)
-
-			/**
-			 *
-			 */
-
-		} else {
-
-			/**
-			 *
-			 */
-
 		}
 
 	}
+
+	/**
+	 *
+	 */
 
 	___onTag (closed) {
 
@@ -446,21 +379,9 @@ class Xml extends events {
 		 */
 
 		if (!this.___closed) {
-
-			/**
-			 * Send notification
-			 */
-
 			this.emit(EVENT_TAG_OPEN, tag)
-
 		} else {
-
-			/**
-			 * Send notification
-			 */
-
 			this.emit(EVENT_TAG_CLOSE, tag)
-
 		}
 
 		/**
@@ -470,6 +391,10 @@ class Xml extends events {
 		this.___closed = false
 
 	}
+
+	/**
+	 *
+	 */
 
 	___onTagClose () {
 
@@ -482,6 +407,10 @@ class Xml extends events {
 
 	}
 
+	/**
+	 *
+	 */
+
 	___onCommentStart () {
 
 		/**
@@ -492,6 +421,10 @@ class Xml extends events {
 		this.___state = STATE_IGNORE_COMMENT
 
 	}
+
+	/**
+	 *
+	 */
 
 	___onCommentEnd () {
 
@@ -504,6 +437,10 @@ class Xml extends events {
 
 	}
 
+	/**
+	 *
+	 */
+
 	___onInstructionStart () {
 
 		/**
@@ -514,6 +451,10 @@ class Xml extends events {
 		this.___state = STATE_INSTRUCTION
 
 	}
+
+	/**
+	 *
+	 */
 
 	___onInstructionEnd () {
 
@@ -539,6 +480,10 @@ class Xml extends events {
 
 	}
 
+	/**
+	 *
+	 */
+
 	___onCDATAStart () {
 
 		/**
@@ -549,6 +494,10 @@ class Xml extends events {
 		this.___state = STATE_CDATA
 
 	}
+
+	/**
+	 *
+	 */
 
 	___onCDATAEnd () {
 
@@ -600,11 +549,6 @@ class Xml extends events {
 			 */
 
 			const i = attr.indexOf('=')
-
-			/**
-			 *
-			 */
-
 			const name = attr.substr(0, i)
 			const value = attr.substr(i + 1)
 
