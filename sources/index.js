@@ -3,13 +3,7 @@
  *
  */
 
-const events = require('events')
-
-/**
- *
- */
-
-const UTF8 = 'utf8'
+const events = require(`events`)
 
 /**
  *
@@ -39,12 +33,12 @@ const STATE_IGNORE_COMMENT = 16
  *
  */
 
-const EVENT_TAG_OPEN = 'tag.open'
-const EVENT_TAG_CLOSE = 'tag.close'
-const EVENT_TAG_INSTRUCTION = 'tag.instraction'
-const EVENT_TAG_CDATA = 'tag.cdata'
-const EVENT_TEXT = 'text'
-const EVENT_END = 'end'
+const EVENT_TAG_OPEN = `tag.open`
+const EVENT_TAG_CLOSE = `tag.close`
+const EVENT_TAG_INSTRUCTION = `tag.instruction`
+const EVENT_TAG_CDATA = `tag.cdata`
+const EVENT_TEXT = `text`
+const EVENT_END = `end`
 
 /**
  ' is replaced with &apos;
@@ -321,7 +315,7 @@ class Xml extends events {
 		 *
 		 */
 
-		return this.___buffer.slice(s, e).toString()
+		return this.___buffer.slice(s, e).toString().trim()
 
 	}
 
@@ -335,7 +329,7 @@ class Xml extends events {
 		 *
 		 */
 
-		const text = this.___decoding(this.___stop, this.___i).trim()
+		const text = this.___decoding(this.___stop, this.___i)
 
 		/**
 		 *
@@ -473,7 +467,7 @@ class Xml extends events {
 		this.___state = STATE_TEXT
 
 		/**
-		 * Send notification
+		 *
 		 */
 
 		this.emit(EVENT_TAG_INSTRUCTION, tag)
@@ -505,7 +499,8 @@ class Xml extends events {
 		 *
 		 */
 
-		const text = this.___decoding(this.___stop, this.___i - 1).slice(text.indexOf('[') + 1, text.lastIndexOf(']'))
+		const text = this.___decoding(this.___stop, this.___i - 1)
+		const textSliced = text.slice(text.indexOf(`[`) + 1, text.lastIndexOf(`]`))
 
 		/**
 		 *
@@ -515,10 +510,10 @@ class Xml extends events {
 		this.___state = STATE_TEXT
 
 		/**
-		 * Send notification
+		 *
 		 */
 
-		this.emit(EVENT_TAG_CDATA, text)
+		this.emit(EVENT_TAG_CDATA, textSliced)
 
 	}
 
@@ -534,21 +529,21 @@ class Xml extends events {
 		 *
 		 */
 
-		const splited = text.split(/\s+(?=[\w:]+=)/g)
-		const name = splited.shift()
+		const split = text.split(/\s+(?=[\w:]+=)/g)
+		const name = split.shift()
 		const attrs = {}
 
 		/**
 		 *
 		 */
 
-		splited.forEach(attr => {
+		split.forEach(attr => {
 
 			/**
 			 *
 			 */
 
-			const i = attr.indexOf('=')
+			const i = attr.indexOf(`=`)
 			const name = attr.substr(0, i)
 			const value = attr.substr(i + 1)
 
@@ -556,7 +551,7 @@ class Xml extends events {
 			 *
 			 */
 
-			attrs[name] = value.trim().replace(/"|'/g, '')
+			attrs[name] = value.trim().replace(/"|'/g, ``)
 
 		})
 
