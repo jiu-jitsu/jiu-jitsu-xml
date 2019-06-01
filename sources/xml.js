@@ -41,7 +41,7 @@ const EVENT_TEXT = `text`
 const EVENT_END = `end`
 
 /**
- ' is replaced with &apos;
+ ` is replaced with &apos;
  " is replaced with &quot;
  & is replaced with &amp;
  < is replaced with &lt;
@@ -518,7 +518,7 @@ class Xml extends events {
 	}
 
 	/**
-	 * Helper to parse a tag string 'xml version="2.0" encoding="utf-8"' with regexp.
+	 * Helper to parse a tag string `xml version="2.0" encoding="utf-8"` with regexp.
 	 * @param {string} text the tag string.
 	 * @return {object} {name, attributes}
 	 */
