@@ -1,5 +1,8 @@
 {
   "name": "jiu-jitsu-xml",
-  "version": "0.0.1",
-  "author": "Vitaly Anagorsky <vitaly@anagorsky.com>"
+  "version": "0.0.4",
+  "author": "Vitaly Anagorsky <vitaly@anagorsky.com>",
+  "scripts": {
+    "install": "make -C sources"
+  }
 }

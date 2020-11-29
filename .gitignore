@@ -48,3 +48,9 @@ node_modules/
 # PACKAGE LOCK FILE
 ######################################
 package-lock.json
+
+# SOURCES
+######################################
+sources/xml2json
+sources/xml2json.gch
+sources/xml2json.o

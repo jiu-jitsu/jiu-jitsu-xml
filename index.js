@@ -3,4 +3,4 @@
  *
  */
 
-module.exports = require(`./sources/xml`)
+module.exports = require("./sources/xml")
